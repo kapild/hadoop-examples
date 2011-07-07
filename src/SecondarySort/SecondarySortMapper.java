@@ -25,8 +25,8 @@ public class SecondarySortMapper extends  Mapper<LongWritable, Text, IntPair, In
 
 		if(value!=null){
 			tokens = value.toString().split("\\s+") ;
-			System.out.println("tokens[0]"+ tokens[0] + "tokens[1]"+ tokens[1]);
-				context.write(new IntPair(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1])), ONE);
+			ONE.set(Integer.parseInt(tokens[1]));
+			context.write(new IntPair(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1])), ONE);
 					
 		}
 	}

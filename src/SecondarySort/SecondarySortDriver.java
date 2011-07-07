@@ -34,7 +34,7 @@ public class SecondarySortDriver {
 	    job.setMapOutputKeyClass(IntPair.class);
 	    job.setMapOutputValueClass(IntWritable.class);
 	    job.setOutputKeyClass(IntPair.class);
-	    job.setOutputValueClass(NullWritable.class);
+	    job.setOutputValueClass(IntWritable.class);
 
 	    job.setPartitionerClass(SecondarySortPartitioner.class);
 	    job.setGroupingComparatorClass(SecondarySortGroupComparator.class);
