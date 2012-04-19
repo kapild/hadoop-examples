@@ -13,10 +13,13 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import CustomKey.TextPair;
 import ReduceSideJoin.ReduceSideJoinGroupComparator;
 import ReduceSideJoin.ReduceSideJoinPartitioner;
+import ScoreFriends.Job1.ReduceSideJoin_1_FriendsUserMapper;
 import ScoreFriends.Job1.ReduceSideJoin_1_GroupComparator;
 import ScoreFriends.Job1.ReduceSideJoin_1_Partitioner;
+import ScoreFriends.Job1.ReduceSideJoin_1_UserScoreMapper;
 import ScoreFriends.Job2.SecondarySort_2_GroupComparator;
 import ScoreFriends.Job2.SecondarySort_2_Partitioner;
+import ScoreFriends.Job2.SecondarySort_2_UserFriendMapper;
 
 
 
@@ -44,8 +47,8 @@ public class FriendScoreDriver {
 	    job.setOutputValueClass(Text.class);
 	    job.setOutputFormatClass(TextOutputFormat.class);
 
-	    String job1OutPath = pathOut + "/job1"
-	    FileOutputFormat.setOutputPath(job, new Path(job1OutPath)));
+	    String job1OutPath = pathOut + "/job1";
+	    FileOutputFormat.setOutputPath(job, new Path(job1OutPath));
 	    job.waitForCompletion(true);
 	  //====================
 
@@ -63,8 +66,8 @@ public class FriendScoreDriver {
 	    job2.setPartitionerClass(ReduceSideJoin_1_Partitioner.class);
 	    job2.setGroupingComparatorClass(ReduceSideJoin_1_GroupComparator.class);
 
-	    String job2OutPath = pathOut + "/job2"
-	    FileOutputFormat.setOutputPath(job2, new Path(job2OutPath)));
+	    String job2OutPath = pathOut + "/job2";
+	    FileOutputFormat.setOutputPath(job2, new Path(job2OutPath));
 	    job2.waitForCompletion(true);
 	    
 //====================
@@ -81,8 +84,8 @@ public class FriendScoreDriver {
 	    job3.setPartitionerClass(SecondarySort_2_Partitioner.class);
 	    job3.setGroupingComparatorClass(SecondarySort_2_GroupComparator.class);
 
-	    String job3OutPath = pathOut + "/job3"
-	    FileOutputFormat.setOutputPath(job3, new Path(job3OutPath)));
+	    String job3OutPath = pathOut + "/job3";
+	    FileOutputFormat.setOutputPath(job3, new Path(job3OutPath));
 	    job3.waitForCompletion(true);
 	    
 	}

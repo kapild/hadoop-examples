@@ -29,12 +29,12 @@ public class ReduceSide_1_Reducer extends  Reducer<TextPair, Text, Text, TextPai
 
 		Iterator<Text> it = values.iterator();
 
-		SCORE.set(it.next()
+		SCORE.set(it.next());
 		
 		TextPair friend = key;
 		Text user = null;
 		for(;it.hasNext();){
-			user = it.next;
+			user = it.next();
 			context.write(user, new TextPair(friend.getFirst(), SCORE ));
 		}
 		

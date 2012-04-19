@@ -24,7 +24,7 @@ public class EmitFriendsMapper extends  Mapper<LongWritable, Text, Text, Text> {
 			tokens = value.toString().split("\\s+") ;
 			String user = tokens[0];
 			for(int i =1;i < tokens.length; i++){
-				context.write(new Text(tokens[i])), new Text(user));
+				context.write(new Text(tokens[i]), new Text(user));
 			}
 					
 		}

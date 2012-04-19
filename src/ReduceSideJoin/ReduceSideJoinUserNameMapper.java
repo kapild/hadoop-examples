@@ -25,7 +25,7 @@ public class ReduceSideJoinUserNameMapper extends  Mapper<LongWritable, Text, Te
 
 		if(value!=null){
 			tokens = value.toString().split("\\s+") ;
-			context.write(new TextPair(tokens[0], "1"), new Text(tokens[1]));
+			context.write(new TextPair(tokens[0], "0"), new Text(tokens[1]));
 					
 		}
 	}
