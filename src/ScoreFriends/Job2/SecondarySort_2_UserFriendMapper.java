@@ -13,7 +13,7 @@ import CustomKey.TextPair;
 
 
 
-public class SecondarySort_2_UserFriendMapper extends  Mapper<LongWritable, Text, TextPair, Text> {
+public class SecondarySort_2_UserFriendMapper extends  Mapper<LongWritable, Text, TextPair, TextPair> {
 	
 	private String [] tokens = null;
 
