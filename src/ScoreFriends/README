@@ -1,0 +1,5 @@
+This Map reduce pipeline helps you to sort your friends on a simple score. 
+
+Each user has a list of friend and each user also has a score. 
+
+In the end, it will just sort the user friends in an descreasing friend's score.
