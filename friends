@@ -3,31 +3,3 @@ b	a	d	e	f
 c	a	f
 d	a	b	c
 f	a	d
-
-
-b	a
-c	a
-d	a
-e	a
-f	a
-a	b
-d	b
-e	b
-f	b
-a	c
-f	c
-a	d
-b	d
-c	d
-a	f
-d	f
-
-a	10
-b	200
-c	2500
-d	400
-e	500
-f	1
-
-
-b 0 200, a , d  

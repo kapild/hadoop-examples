@@ -1,10 +1,11 @@
 package ScoreFriends.Job1;
 
+
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 
-import CustomKey.IntPair;
 import CustomKey.TextPair;
+
 
 public class ReduceSideJoin_1_GroupComparator extends WritableComparator{
 

@@ -1,5 +1,6 @@
 package ScoreFriends.Job2;
 
+
 import java.io.IOException;
 
 import java.util.Iterator;
@@ -14,16 +15,17 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 import org.apache.hadoop.util.bloom.Key;
 
-import CustomKey.IntPair;
+import CustomKey.TextIntPair;
 import CustomKey.TextPair;
 
 
 
-public class SecondarySort_2_Reducer extends  Reducer<TextPair, TextPair, Text, TextPair> {
+
+public class SecondarySort_2_Reducer extends  Reducer<TextIntPair, TextPair, Text, TextPair> {
 
 	
 	@Override
-	protected void reduce(TextPair key, Iterable<TextPair> values, Context context)
+	protected void reduce(TextIntPair key, Iterable<TextPair> values, Context context)
 			throws IOException, InterruptedException {
 
 		Iterator<TextPair> it = values.iterator();

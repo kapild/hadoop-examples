@@ -1,38 +1,40 @@
 package CustomKey;
 
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
 
 
-public class IntPair implements WritableComparable<IntPair> {
+public class TextIntPair implements WritableComparable<TextIntPair> {
 	
-	public IntWritable first;
+	public Text first;
 	public IntWritable second;
 	
 	
 	
-	public IntWritable getFirst() {
+	public Text getFirst() {
 		return first;
 	}
 	public IntWritable getSecond() {
 		return second;
 	}
 	
-	public IntPair(){
+	public TextIntPair(){
 		
-		first = new IntWritable();
+		first = new Text();
 		second  = new IntWritable();
 	}
-	public IntPair(int first, int second){
+	public TextIntPair(String first, String second){
 		
-		this(new IntWritable(first), new IntWritable(second));
+		this(new Text(first), new IntWritable(Integer.valueOf(second)));
 	}
 	
-	public IntPair(IntWritable first, IntWritable second){
+	public TextIntPair(Text first, IntWritable second){
 		this.first = first;
 		this.second = second;
 	}
@@ -50,18 +52,19 @@ public class IntPair implements WritableComparable<IntPair> {
 	}
 	
 	@Override
-	public int compareTo(IntPair that) {
+	public int compareTo(TextIntPair that) {
 		int cmp = first.compareTo(that.first);
 		if(cmp==0){
-			cmp = second.compareTo(that.second);
+			return -second.compareTo(that.second);
 		}
 		return cmp;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		
-		if (obj instanceof IntPair){
-			IntPair that = (IntPair)obj;
+		if (obj instanceof TextIntPair){
+			TextIntPair that = (TextIntPair)obj;
 			return (first.equals(that.first) && second.equals(that.second));
 		}
 		

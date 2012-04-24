@@ -1,5 +1,19 @@
 package ScoreFriends;
 
+
+
+import CustomKey.TextIntPair;
+import CustomKey.TextPair;
+import ScoreFriends.Job1.ReduceSideJoin_1_FriendsUserMapper;
+import ScoreFriends.Job1.ReduceSideJoin_1_GroupComparator;
+import ScoreFriends.Job1.ReduceSideJoin_1_Partitioner;
+import ScoreFriends.Job1.ReduceSideJoin_1_UserScoreMapper;
+import ScoreFriends.Job1.ReduceSide_1_Reducer;
+import ScoreFriends.Job2.SecondarySort_2_GroupComparator;
+import ScoreFriends.Job2.SecondarySort_2_Partitioner;
+import ScoreFriends.Job2.SecondarySort_2_Reducer;
+import ScoreFriends.Job2.SecondarySort_2_UserFriendMapper;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -10,16 +24,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 
-import CustomKey.TextPair;
-import ReduceSideJoin.ReduceSideJoinGroupComparator;
-import ReduceSideJoin.ReduceSideJoinPartitioner;
-import ScoreFriends.Job1.ReduceSideJoin_1_FriendsUserMapper;
-import ScoreFriends.Job1.ReduceSideJoin_1_GroupComparator;
-import ScoreFriends.Job1.ReduceSideJoin_1_Partitioner;
-import ScoreFriends.Job1.ReduceSideJoin_1_UserScoreMapper;
-import ScoreFriends.Job2.SecondarySort_2_GroupComparator;
-import ScoreFriends.Job2.SecondarySort_2_Partitioner;
-import ScoreFriends.Job2.SecondarySort_2_UserFriendMapper;
 
 
 
@@ -65,7 +69,7 @@ public class FriendScoreDriver {
 	    job2.setOutputFormatClass(TextOutputFormat.class);
 	    job2.setPartitionerClass(ReduceSideJoin_1_Partitioner.class);
 	    job2.setGroupingComparatorClass(ReduceSideJoin_1_GroupComparator.class);
-
+	    job2.setReducerClass(ReduceSide_1_Reducer.class);
 	    String job2OutPath = pathOut + "/job2";
 	    FileOutputFormat.setOutputPath(job2, new Path(job2OutPath));
 	    job2.waitForCompletion(true);
@@ -74,15 +78,19 @@ public class FriendScoreDriver {
 	    Job job3 = new Job(new Configuration(), "Sort Friends score");
 	    job3.setJarByClass(FriendScoreDriver.class);
 
-	    MultipleInputs.addInputPath(job3, new Path(pathScore), TextInputFormat.class, SecondarySort_2_UserFriendMapper.class);
+	    MultipleInputs.addInputPath(job3, new Path(job2OutPath), TextInputFormat.class, SecondarySort_2_UserFriendMapper.class);
 
-	    job3.setMapOutputKeyClass(TextPair.class);
+	    job3.setMapOutputKeyClass(TextIntPair.class);
 	    job3.setMapOutputValueClass(TextPair.class);
 	    job3.setOutputKeyClass(Text.class);
 	    job3.setOutputValueClass(TextPair.class);
+	    
 	    job3.setOutputFormatClass(TextOutputFormat.class);
+	    
 	    job3.setPartitionerClass(SecondarySort_2_Partitioner.class);
 	    job3.setGroupingComparatorClass(SecondarySort_2_GroupComparator.class);
+//	    job3.setSortComparatorClass(SecondarySort_2_Comparator.class);
+	    job3.setReducerClass(SecondarySort_2_Reducer.class);
 
 	    String job3OutPath = pathOut + "/job3";
 	    FileOutputFormat.setOutputPath(job3, new Path(job3OutPath));

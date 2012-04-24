@@ -10,8 +10,8 @@ import org.apache.hadoop.io.WritableComparable;
 
 public class TextPair implements WritableComparable<TextPair> {
 	
-	Text first;
-	Text second;
+	public Text first;
+	public Text second;
 	
 	
 	

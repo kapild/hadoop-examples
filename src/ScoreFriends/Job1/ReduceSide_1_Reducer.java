@@ -1,5 +1,6 @@
 package ScoreFriends.Job1;
 
+
 import java.io.IOException;
 
 import java.util.Iterator;
@@ -14,7 +15,6 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 import org.apache.hadoop.util.bloom.Key;
 
-import CustomKey.IntPair;
 import CustomKey.TextPair;
 
 
